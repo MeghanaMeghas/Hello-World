@@ -17,3 +17,13 @@ spec:
           image: gcr.io/phrasal-verve-447910-d9/hello-world-app:latest
           ports:
             - containerPort: 8080
+      # Add Docker socket mounting here
+      volumes:
+        - name: docker-socket
+          hostPath:
+            path: /var/run/docker.sock
+            type: Socket
+      # Mount the Docker socket to make it available in the container
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-socket
